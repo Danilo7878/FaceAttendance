@@ -28,6 +28,25 @@ def findEncodings(images):
         encodeList.append(encode)
     return encodeList
 
+
+def markAttendance(name):
+    with open('Attendance.csv', 'r+') as f:
+        myDataList = f.readlines()
+
+
+        now = datetime.now()
+        dtString = now.strftime('%d/%m/%Y')
+        timeString = now.strftime('%H:%M:%S')
+        nameList = []
+        
+        for line in myDataList:
+            entry = line.split(',')
+            if entry[1] == dtString:
+                nameList.append(entry[0]) #guardar nombres del día de hoy
+                
+        if name not in nameList:
+            f.writelines(f'{name},{dtString},{timeString}\n')
+
 #### FOR CAPTURING SCREEN RATHER THAN WEBCAM
 # def captureScreen(bbox=(300,300,690+300,530+300)):
 #     capScr = np.array(ImageGrab.grab(bbox))
@@ -62,6 +81,7 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
             cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+            markAttendance(name)
 
     cv2.imshow('Webcam', img)
     cv2.waitKey(1)
