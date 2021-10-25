@@ -1,3 +1,44 @@
 .noticias{
     margin: 1% 10%;
 }
+.tarjetas{
+    background-color: white;
+}
+
+.tarjetas .paper {
+    background-color: white;
+    width: 70%;
+    height: auto;
+    margin-left: 10%;
+    margin-top: 15%;
+    border-right: black 10px solid;
+}
+
+.tarjetas .paper Button{
+    background-color: white;
+    display: flex;
+    margin-top: 2%;
+}
+
+.cards__container .cards__wrapper .cards__items {
+    height: 100%;
+    background-color: white;
+}
+
+.todo .tituloClase{
+    background-color: white;
+    border: black 5px solid;
+    height: max-content;
+    margin-top: 5%;
+    line-height : 25px;
+}
+
+.todo .catedratico{
+    margin-top: 1%;
+}
+
+.todo .catedratico .tipo{
+    margin-left: 33%;
+    margin-right: 16%;
+    background-color: white;
+}

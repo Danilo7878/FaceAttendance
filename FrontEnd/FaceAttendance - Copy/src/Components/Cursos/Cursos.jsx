@@ -2,6 +2,9 @@ import React from 'react'
 import { Fragment } from 'react';
 import './News.css'
 import { AppBar, Grid, List, ListItem, ListItemText, Paper, Typography, Button } from '@material-ui/core';
+import Footer from '../Home/Footer'
+import CardItem from "../Home/CardItem";
+import Foto from '../../Media/icono.png'
 //import ListItemButton from '@mui/material';
 import { Link } from "react-router-dom";
 
@@ -42,13 +45,41 @@ const News = () => {
         }, {
             "_id": "124",
             "catedratico": "Ingeniero Guillermo Zepeda ",
-            "curso": "Analisis y diseno ",
-            "hora": "Lunes y Miercoles 19:30 - 21:00"
+            "curso": "Analisis y diseno I",
+            "hora": "Lunes y Miercoles 19:30 - 21:00",
+            "clases": [
+                {
+                    "numero": "1",
+                    "Tema": "Scrum Básico",
+                    "Fecha": "02/01/2021",
+                    "Asistencia": []
+                },
+                {
+                    "numero": "2",
+                    "Tema": "Business Analysis",
+                    "Fecha": "10/01/2021",
+                    "Asistencia": []
+                }
+            ]
         }, {
             "_id": "125",
             "catedratico": "Ingeniero Guillermo Zepeda ",
             "curso": "Programacion Avanzada ",
-            "hora": "Martes y Jueves 07:00 - 08:30"
+            "hora": "Martes y Jueves 07:00 - 08:30",
+            "clases": [
+                {
+                    "numero": "1",
+                    "Tema": "Matrices",
+                    "Fecha": "03/01/2021",
+                    "Asistencia": []
+                },
+                {
+                    "numero": "2",
+                    "Tema": "Recursividad",
+                    "Fecha": "11/01/2021",
+                    "Asistencia": []
+                }
+            ]
         }]
 
         setCate(cursos[0].catedratico)
@@ -64,32 +95,75 @@ const News = () => {
     return (
 
         <div className="todo">
-            <AppBar position="static" color="inherit">
+
+            <AppBar position="static" color="inherit" className="catedratico">
                 <Typography
                     variant="h4"
-                    align="center">
+                    align="center" className="tipo">
                     {cate}
                 </Typography>
             </AppBar>
 
-            <Grid item xs={4} className="tarjetas">
-                <Paper className="paper">
+            <Grid container spacing={12}>
 
-                    <List component="nav">
-                        {
-                            curso.map(item => (
-                                <Fragment key={item._id} className="carta">
-                                    <Button key={item._id} onClick={handleClick}>
-                                        <ListItemText primary={item.curso} />
-                                        {open ? "▲" : "▼"}
-                                    </Button>
-                                </Fragment>
-                            ))
-                        }
-                    </List>
-                </Paper>
+                <Grid item xs={4} className="tarjetas">
+                    <Paper className="paper">
+                        <List component="nav">
+                            {
+                                curso.map(item => (
+                                    <Fragment key={item._id} className="carta">
+                                        <Button key={item._id} onClick={handleClick}>
+                                            <ListItemText primary={item.curso} />
+                                            {open ? "▲" : "▼"}
+                                        </Button>
+                                    </Fragment>
+                                ))
+                            }
+                        </List>
+                    </Paper>
+                </Grid>
+
+                <Grid item xs={6} className="tituloClase">
+                    <Typography
+                        variant="h4"
+                        align="center">                        
+                        Tecnologías Emergentes - dd/mm - Realidad virtual
+                    </Typography>
+                </Grid>
+
+                <Grid item xs={4} className="vacio">
+                </Grid>
+
+                <Grid item xs={6} className="asistencia">
+                    <div className="cards__container">
+                        <div className="cards__wrapper">
+                            <ul className="cards__items">
+                                <CardItem className="card-back"
+                                    src= {Foto}
+                                    text="Walter Orozco"
+                                />
+                                <CardItem className="card-back"
+                                    src= {Foto}
+                                    text="Luis Roldan"
+                                />
+                            </ul>
+                            <ul className="cards__items">
+                                <CardItem className="card-back"
+                                    src= {Foto}
+                                    text="Danilo Sandoval"
+                                />
+                                <CardItem className="card-back"
+                                    src= {Foto}
+                                    text="Andoni Zamora"
+                                />
+                            </ul>
+                        </div>
+                    </div>
+                </Grid>
             </Grid>
+            <Footer />
         </div >
+        
     )
 }
 
