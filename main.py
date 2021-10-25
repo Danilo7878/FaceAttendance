@@ -3,6 +3,7 @@ import numpy as np
 import face_recognition
 import os
 from datetime import datetime
+import requests
 
 # from PIL import ImageGrab
 
@@ -46,6 +47,15 @@ def markAttendance(name):
                 
         if name not in nameList:
             f.writelines(f'{name},{dtString},{timeString}\n')
+            enviar(name,dtString,timeString)
+            
+#funcion enviar
+def enviar(name,date,time):
+    url = 'http://localhost:3000/attendance'
+    body = {"name": name, "date" : date, "time" : time }  
+    resp = requests.post(url, json=body)
+    print(resp.status_code)
+    print(resp.json())
 
 #### FOR CAPTURING SCREEN RATHER THAN WEBCAM
 # def captureScreen(bbox=(300,300,690+300,530+300)):
