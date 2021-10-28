@@ -1,29 +1,21 @@
 import React from 'react'
-import { Fragment } from 'react';
 import './News.css'
-import { AppBar, Grid, List, ListItem, ListItemText, Paper, Typography, Button } from '@material-ui/core';
+import { AppBar, Grid, List, Paper, Typography } from '@material-ui/core';
 import Footer from '../Home/Footer'
-import CardItem from "../Home/CardItem";
-import Foto from '../../Media/icono.png'
-//import ListItemButton from '@mui/material';
-import { Link } from "react-router-dom";
+
+import Accordion from './Accordion';
 
 const News = () => {
     const [curso, setCurso] = React.useState([])
     const [cate, setCate] = React.useState("")
-    const [attend, setAttend] = React.useState([])
-    const [open, setOpen] = React.useState(true);
-
+    var cursos;
     React.useEffect(() => {
         obtenerDatos()
     }, [])
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
 
     const obtenerDatos = () => {
-        var cursos = [{
+        cursos = [{
             "_id": "123",
             "catedratico": "Ingeniero Guillermo Zepeda ",
             "curso": "Tecnologias emergentes ",
@@ -33,7 +25,20 @@ const News = () => {
                     "numero": "1",
                     "Tema": "Realidad virtual",
                     "Fecha": "01/01/2021",
-                    "Asistencia": []
+                    "Asistencia": [
+                        {
+                            "carne": "123456",
+                            "nombre": "Juan Perez",
+                            "hora": "12:12",
+                            "imagenURL": "http://misimagenesde.com/wp-content/uploads/2017/05/foto-de-perfil-11.jpg"
+                        },
+                        {
+                            "carne": "234567",
+                            "nombre": "Juana Perez",
+                            "hora": "12:12",
+                            "imagenURL": "https://www.movilzona.es/app/uploads-movilzona.es/2019/05/Foto-de-Perfil-en-WhatsApp.jpg?x=480&y=375&quality=40"
+                        }
+                    ]
                 },
                 {
                     "numero": "2",
@@ -82,9 +87,14 @@ const News = () => {
             ]
         }]
 
+
         setCate(cursos[0].catedratico)
         setCurso(cursos)
+        console.log(cursos[0].clases[0].Tema)
     }
+
+    
+
 
     /*const obtenerDatos = async () => {
         const data = await fetch('http://newsapi.org/v2/top-headlines?country=mx&apiKey=6204627390254ac2931b073251803604')
@@ -105,65 +115,21 @@ const News = () => {
             </AppBar>
 
             <Grid container spacing={12}>
-
                 <Grid item xs={4} className="tarjetas">
-                    <Paper className="paper">
-                        <List component="nav">
-                            {
-                                curso.map(item => (
-                                    <Fragment key={item._id} className="carta">
-                                        <Button key={item._id} onClick={handleClick}>
-                                            <ListItemText primary={item.curso} />
-                                            {open ? "▲" : "▼"}
-                                        </Button>
-                                    </Fragment>
-                                ))
-                            }
-                        </List>
-                    </Paper>
-                </Grid>
-
-                <Grid item xs={6} className="tituloClase">
-                    <Typography
-                        variant="h4"
-                        align="center">                        
-                        Tecnologías Emergentes - dd/mm - Realidad virtual
-                    </Typography>
-                </Grid>
-
-                <Grid item xs={4} className="vacio">
-                </Grid>
-
-                <Grid item xs={6} className="asistencia">
-                    <div className="cards__container">
-                        <div className="cards__wrapper">
-                            <ul className="cards__items">
-                                <CardItem className="card-back"
-                                    src= {Foto}
-                                    text="Walter Orozco"
-                                />
-                                <CardItem className="card-back"
-                                    src= {Foto}
-                                    text="Luis Roldan"
-                                />
-                            </ul>
-                            <ul className="cards__items">
-                                <CardItem className="card-back"
-                                    src= {Foto}
-                                    text="Danilo Sandoval"
-                                />
-                                <CardItem className="card-back"
-                                    src= {Foto}
-                                    text="Andoni Zamora"
-                                />
-                            </ul>
-                        </div>
-                    </div>
+                    {
+                        curso.map(item => (
+                            <Accordion
+                                title={item.curso}
+                                content = {item.clases.map(teme => (teme.Tema + "</br>"))}
+                            />
+                        ))
+                        
+                    }
                 </Grid>
             </Grid>
             <Footer />
         </div >
-        
+
     )
 }
 
