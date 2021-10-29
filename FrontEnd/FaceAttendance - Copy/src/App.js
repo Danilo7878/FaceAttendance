@@ -11,7 +11,7 @@ import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import Cursos from './Components/Cursos/Cursos';
-import Curso from './Components/Cursos/Curso';
+import Curso from './Components/Cursos/Perfil';
 
 import './App.css'
 //import { StyledEngineProvider } from '@mui/system';
@@ -33,9 +33,7 @@ function App() {
           </Route>
 
           <Route path="/cursos">
-            
-              <Cursos />
-            
+              <Curso />
           </Route>
           <Route path="/login">
             <div className="mini-nav">
