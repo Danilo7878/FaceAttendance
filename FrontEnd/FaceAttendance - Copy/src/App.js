@@ -31,9 +31,11 @@ function App() {
           <Route path="/home">
             <Home />
           </Route>
-
+          <Route path="/curso/:id" exact>
+            <Curso />
+          </Route>
           <Route path="/cursos">
-              <Curso />
+            <Curso />
           </Route>
           <Route path="/login">
             <div className="mini-nav">

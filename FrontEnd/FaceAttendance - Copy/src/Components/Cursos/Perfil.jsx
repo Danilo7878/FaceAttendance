@@ -1,5 +1,5 @@
 import { Avatar, Button, Grid, Typography } from '@material-ui/core';
-import {Box, Divider} from '@mui/material';
+import { Box, Divider } from '@mui/material';
 //import * as actionType from '../../constants/actionTypes';
 import { useHistory, Link } from 'react-router-dom';
 //import { useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ const Perfil = () => {
 
     const classes = useStyles();
     var cursos = [{
-        "_id": "21561212",
+        "_id": "500c169afcdd656e",
         "catedratico": "Ingeniero Guillermo Zepeda ",
         "curso": "Tecnologias emergentes SEC 1",
         "hora": "Martes y Jueves 17:30 - 19:00",
@@ -45,7 +45,7 @@ const Perfil = () => {
             }
         ]
     }, {
-        "_id": "124",
+        "_id": "22dab1257dc6471b",
         "catedratico": "Ingeniero Guillermo Zepeda ",
         "curso": "Analisis y diseno I SEC 1",
         "hora": "Lunes y Miercoles 19:30 - 21:00",
@@ -64,7 +64,7 @@ const Perfil = () => {
             }
         ]
     }, {
-        "_id": "125",
+        "_id": "39c2c83b1267b58b",
         "catedratico": "Ingeniero Guillermo Zepeda ",
         "curso": "Programacion Avanzada SEC 2",
         "hora": "Martes y Jueves 07:00 - 08:30",
@@ -105,7 +105,7 @@ const Perfil = () => {
 
     return (
         <div className="front-con-cuenta" >
-            <Grid className="perfil-css" border= "1px solid grey">
+            <Grid className="perfil-css" border="1px solid grey">
                 <Avatar id="av" className={classes.large} src="https://sessionize.com/image/302b-400o400o2-c2-5cfa-4281-b1ab-07aca24f78f4.f4ea7174-a632-4b17-8c1f-92721f5f6ed5.jpg"></Avatar>
                 <Typography
                     variant="h4"
@@ -119,35 +119,35 @@ const Perfil = () => {
                 >
                     {cursos[0]._id}
                 </Typography>
-
-                <Box sx={{ width: '100%', maxWidth: 360, border: '1px solid', borderColor: 'grey.500'}}>
-                    <Box sx={{ my: 3, mx: 2 }}>
-                        <Grid container alignItems="center">
-                            <Grid item xs>
-                                <Typography gutterBottom variant="h4" component="div">
-                                    Toothbrush
+                {
+                    curso.map(item => (
+                        <Box sx={{ width: '100%', maxWidth: 360, border: '1px solid', borderColor: 'grey.500' }}>
+                            <Box sx={{ my: 3, mx: 2 }}>
+                                <Grid container alignItems="center">
+                                    <Grid item xs>
+                                        <Typography gutterBottom variant="h5" component="div">
+                                            {item.curso}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                                <Typography color="text.secondary" variant="body2">
+                                    {item.hora}
                                 </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography gutterBottom variant="h6" component="div">
-                                    $4.50
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                        <Typography color="text.secondary" variant="body2">
-                            Pinstriped cornflower blue cotton blouse takes you on a walk to the park or
-                            just down the hall.
-                        </Typography>
-                    </Box>
-                    <Divider variant="middle" />
-                    <Box sx={{ mt: 3, ml: 1, mb: 1 }}>
-                        <Button>Add to cart</Button>
-                    </Box>
-                </Box>
-
-                <Link to="/addNews">
-                    <button className="btn btn-add">Agregar noticia</button>
-                </Link><br /><br />
+                            </Box>
+                            <Divider variant="middle" />
+                            <Box sx={{ mt: 3, ml: 1, mb: 1 }}>
+                                <Link to={`/news/${item._id}`} className="titulo-not">
+                                    <Button variant="contained" color="primary" size="small"
+                                        id="myBtn"
+                                        className="btn-leer"
+                                        onClick={console.log("x")}>
+                                        Leer
+                                    </Button>
+                                </Link>
+                            </Box>
+                        </Box>
+                    ))
+                }
 
                 <Button variant="contained" className={classes.logout} color="secondary">Salir</Button>
 
@@ -156,5 +156,6 @@ const Perfil = () => {
 
     )
 }
-
+//https://stackoverflow.com/questions/30115324/pass-props-in-link-react-router
+//https://bluuweb.github.io/react-udemy/06-router/#parametros
 export default Perfil

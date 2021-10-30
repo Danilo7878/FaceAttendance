@@ -5,7 +5,7 @@ import Footer from '../Home/Footer'
 
 import Accordion from './Accordion';
 
-const News = () => {
+const News = (props) => {
     const [curso, setCurso] = React.useState([])
     const [cate, setCate] = React.useState("")
     var cursos;
