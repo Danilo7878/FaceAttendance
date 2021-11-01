@@ -15,6 +15,7 @@ const Perfil = () => {
     var cursos = [{
         "_id": "500c169afcdd656e",
         "catedratico": "Ingeniero Guillermo Zepeda ",
+        "carne":"1321612",
         "curso": "Tecnologias emergentes SEC 1",
         "hora": "Martes y Jueves 17:30 - 19:00",
         "clases": [
@@ -92,7 +93,7 @@ const Perfil = () => {
 
         setCate(cursos[0].catedratico)
         setCurso(cursos)
-        console.log(cursos[0].clases[0].Tema)
+        //console.log(cursos[0].clases[0].Tema)
     }
 
     const [noticia, setNoticia] = React.useState([])
@@ -117,11 +118,11 @@ const Perfil = () => {
                     variant="h5"
                     align="center"
                 >
-                    {cursos[0]._id}
+                    {cursos[0].carne}
                 </Typography>
                 {
                     curso.map(item => (
-                        <Box sx={{ width: '100%', maxWidth: 360, border: '1px solid', borderColor: 'grey.500' }}>
+                        <Box className="cursos-lista" sx={{ width: '100%', maxWidth: 360, border: '1px solid', borderColor: 'grey.500' }}>
                             <Box sx={{ my: 3, mx: 2 }}>
                                 <Grid container alignItems="center">
                                     <Grid item xs>
@@ -136,26 +137,20 @@ const Perfil = () => {
                             </Box>
                             <Divider variant="middle" />
                             <Box sx={{ mt: 3, ml: 1, mb: 1 }}>
-                                <Link to={`/news/${item._id}`} className="titulo-not">
-                                    <Button variant="contained" color="primary" size="small"
-                                        id="myBtn"
-                                        className="btn-leer"
-                                        onClick={console.log("x")}>
-                                        Leer
-                                    </Button>
+                                <Link to={`/attendance/${item._id}`} className="titulo-not">
+                                    
+                                        Ver
                                 </Link>
                             </Box>
                         </Box>
                     ))
                 }
 
-                <Button variant="contained" className={classes.logout} color="secondary">Salir</Button>
+                <Button variant="contained" className={classes.logout} color="secondary">Cerrar sesion</Button>
 
             </Grid>
         </div>
 
     )
 }
-//https://stackoverflow.com/questions/30115324/pass-props-in-link-react-router
-//https://bluuweb.github.io/react-udemy/06-router/#parametros
 export default Perfil

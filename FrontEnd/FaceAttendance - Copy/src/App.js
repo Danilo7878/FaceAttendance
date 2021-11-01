@@ -31,8 +31,8 @@ function App() {
           <Route path="/home">
             <Home />
           </Route>
-          <Route path="/curso/:id" exact>
-            <Curso />
+          <Route path="/attendance/:id" exact>
+            <Cursos />
           </Route>
           <Route path="/cursos">
             <Curso />
