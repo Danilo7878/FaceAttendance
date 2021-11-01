@@ -1,20 +1,23 @@
 import React from 'react'
 import './News.css'
-import { AppBar, Grid, List, Paper, Typography } from '@material-ui/core';
+import { AppBar, Grid, Typography } from '@material-ui/core';
 import Footer from '../Home/Footer'
 
 import Accordion from './Accordion';
+import { useParams } from 'react-router';
 
 const News = (props) => {
     const [curso, setCurso] = React.useState([])
     const [cate, setCate] = React.useState("")
     var cursos;
+    const {id} = useParams();
     React.useEffect(() => {
         obtenerDatos()
     }, [])
 
 
     const obtenerDatos = () => {
+        //aca se debe de consultar nuevamente a la base de datos para que se actualize cada vez que llegue una nueva entrada. 
         cursos = [{
             "_id": "123",
             "catedratico": "Ingeniero Guillermo Zepeda ",
@@ -87,10 +90,9 @@ const News = (props) => {
             ]
         }]
 
-
+        //console.log(id)
         setCate(cursos[0].catedratico)
         setCurso(cursos)
-        console.log(cursos[0].clases[0].Tema)
     }
 
     
