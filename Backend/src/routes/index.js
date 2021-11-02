@@ -10,8 +10,8 @@ const User = require('../models/User');
 const Verify = require('../models/Verify');
 
 
-router.post('/SignUp', async (req, res) => {
-   await User.findOne({email: req.body.email})
+router.post('/SignUp', (req, res) => {
+    User.findOne({email: req.body.email})
     .exec()
     .then(user => {
         if(user){
@@ -70,9 +70,15 @@ router.post('/Login', (req,res) => {
     });
 });
 
-//Routes to get list of attendance
-/*router.post('', Verify, (req,res) => {       
-
+//Ruta para obtener el listado de un catedrático específico, de una clase específica en una fecha específica
+/*router.get('/GetAll', Verify, (req,res) => {       
+    Book.find({user: req.userId})
+    .then(list => {
+        return res.status(200).json({books: books});
+    })
+    .catch(err => {
+        res.status(500).json({ error: err});
+    });
 })*/
 
 module.exports = router;
