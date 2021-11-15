@@ -37,7 +37,8 @@ class Signup extends React.Component {
                     </div>
                 </div>
                 <div className="footer">
-                    <button type="button" className="btn-login">Registrar</button>
+                    <button type="button" className="btn-login" onClick={()=>{alert("Registro Exitoso!!");}}>
+                        <Link to="/home">Registrar</Link></button>
                 </div>
             </div>
         )
