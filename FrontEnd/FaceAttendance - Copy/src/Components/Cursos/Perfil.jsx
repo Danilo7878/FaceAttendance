@@ -146,7 +146,7 @@ const Perfil = () => {
                     ))
                 }
 
-                <Button variant="contained" className={classes.logout} color="secondary">Cerrar sesion</Button>
+                <Button variant="contained" className={classes.logout} color="secondary"><Link to="/home">Cerrar sesion</Link></Button>
 
             </Grid>
         </div>

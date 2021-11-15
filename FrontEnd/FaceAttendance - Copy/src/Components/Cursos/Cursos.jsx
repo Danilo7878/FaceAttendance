@@ -2,9 +2,10 @@ import React from 'react'
 import './News.css'
 import { AppBar, Grid, Typography } from '@material-ui/core';
 import Footer from '../Home/Footer'
-
+import '../Cursos/cursos.css';
 import Accordion from './Accordion';
 import { useParams } from 'react-router';
+import axios from "axios";
 
 const News = (props) => {
     const [curso, setCurso] = React.useState([])
@@ -271,6 +272,21 @@ const News = (props) => {
         })
     }
 
+    let url = 'http://localhost:8080/GetList/15-11-2021';
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => mostrarData(data))
+    .catch(error => console.log(error))
+
+    const mostrarData = (data) => {
+        console.log(data)
+        let body = ''
+        for (let i = 0; i<data.length; i++){
+            body += `<tr><td>${data[i].nombre}</td><td>${data[i].hora}</td><td>${data[i].imagen}</td></tr>`                
+        }
+        document.getElementById('data').innerHTML = body
+    } 
 
 
 
@@ -282,19 +298,41 @@ const News = (props) => {
     }*/
     return (
 
-        <div className="todo">
-
-            Id: <input type="number" id="claseId" /><button onClick="cargarDatos(this)">Cargar datos clase</button>
-            Clase JSON:
-            <div id="claseDatos">
-
+        <div className="todo" >
+            <div className="contenido">
+                <br />
+                Fecha: <input type="date" id="claseId" /><button onClick="cargarDatos(this)">CARGAR DATOS</button>
+                <br />
+                <h4>Participantes:</h4>
+                <br />
+                <div className="claseDatos">
+                    <table className="table" >
+                        <thead>
+                            <tr>
+                            <th>Nombre</th>
+                            <th>Hora</th>
+                            <th>Imagen</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data">
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <h4>Catedratico:</h4> 
+                <span id="catedratico"> Ingeniero Guillermo Zepeda.</span>
+                <br />
+                <br />
+                <h4>Clase:</h4>
+                <span id="clase"> Tecnologias emergentes SEC 1</span>
             </div>
-
-            catedratico: <span id="catedratico"></span>
-
-            clases: <span id="clases"></span>
-
-
+            <div className="pie">
+                <Footer />
+            </div>
+        
         </div >
 
     )

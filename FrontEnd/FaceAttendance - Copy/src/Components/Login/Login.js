@@ -30,7 +30,7 @@ class Login extends React.Component {
                     </div>
                 </div>
                 <div className="footer">
-                    <button type="button" className="btn-login">Login</button>
+                <Link to="/cursos"><button type="button" className="btn-login">Login</button></Link>
                 </div>
             </div>
         )
