@@ -272,21 +272,7 @@ const News = (props) => {
         })
     }
 
-    let url = 'http://localhost:8080/GetList/15-11-2021';
-
-    fetch(url)
-    .then(response => response.json())
-    .then(data => mostrarData(data))
-    .catch(error => console.log(error))
-
-    const mostrarData = (data) => {
-        console.log(data)
-        let body = ''
-        for (let i = 0; i<data.length; i++){
-            body += `<tr><td>${data[i].nombre}</td><td>${data[i].hora}</td><td>${data[i].imagen}</td></tr>`                
-        }
-        document.getElementById('data').innerHTML = body
-    } 
+    
 
 
 
@@ -301,7 +287,39 @@ const News = (props) => {
         <div className="todo" >
             <div className="contenido">
                 <br />
-                Fecha: <input type="date" id="claseId" /><button onClick="cargarDatos(this)">CARGAR DATOS</button>
+                <h4>Catedratico:</h4> 
+                <span id="catedratico"> Ingeniero Guillermo Zepeda.</span>
+                <br />
+                <br />
+                <h4>Clase:</h4>
+                <span id="clase"> Tecnologias emergentes SEC 1</span>
+                <br />
+                <br />
+                Fecha: <input type="date" id="claseId" min="06-11-2021" max="15-11-2021"/><button onClick= {()=>{
+                    let fecha = ""
+                    fecha = document.getElementById("claseId").value
+                    var resFecha = fecha.split("-");
+                    var reversedFecha = resFecha.reverse(); 
+                    var FechaOb=reversedFecha.join('-');
+                    //console.log(FechaOb)
+                    let url = `http://localhost:8080/GetList/${FechaOb}`;
+                    fetch(url)
+                    .then(response => response.json())
+                    .then(data => mostrarData(data))
+                    .catch(error => console.log(error))
+
+                    const mostrarData = (data) => {
+                        //console.log(data.entry[0].name)
+                        let body = ""
+                        for (let i = 0; i<data.entry.length; i++){
+                            console.log(data.entry[0].name)
+                            body += `<tr><td>${data.entry[i].name}</td><td>${data.entry[i].time}</td><td><a href="https://alumnostark.s3.amazonaws.com/${data.entry[i].name}.jpg"> Click Here</a></td></tr>`                
+                        }
+                        document.getElementById("data").innerHTML = body
+                    } }}
+                >
+                    CARGAR DATOS</button>
+                <br />
                 <br />
                 <h4>Participantes:</h4>
                 <br />
@@ -314,20 +332,11 @@ const News = (props) => {
                             <th>Imagen</th>
                             </tr>
                         </thead>
-                        <tbody id="data">
+                        <tbody id="data" className="data">
                         </tbody>
                     </table>
                 </div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <h4>Catedratico:</h4> 
-                <span id="catedratico"> Ingeniero Guillermo Zepeda.</span>
-                <br />
-                <br />
-                <h4>Clase:</h4>
-                <span id="clase"> Tecnologias emergentes SEC 1</span>
+                
             </div>
             <div className="pie">
                 <Footer />
