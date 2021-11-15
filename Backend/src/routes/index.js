@@ -70,6 +70,16 @@ router.post('/Login', (req,res) => {
     });
 });
 
+router.get('/GetUsers', (req,res) => {
+    User.find()
+    .then(users => {
+        return res.status(200).json({users: users});
+    })
+    .catch(err => {
+        res.status(500).json({ error: err});
+    });
+})
+
 //Ruta para obtener el listado de un catedrático específico, de una clase específica en una fecha específica
 router.get('/GetList', (req,res) => {
     Entry.find()
