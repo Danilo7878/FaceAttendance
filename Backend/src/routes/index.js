@@ -71,7 +71,7 @@ router.post('/Login', (req,res) => {
 });
 
 //Ruta para obtener el listado de un catedrático específico, de una clase específica en una fecha específica
-router.get('/GetList', Verify, (req,res) => {
+router.get('/GetList', (req,res) => {
     Entry.find()
     .then(entry => {
         return res.status(200).json({entry: entry});
@@ -81,7 +81,7 @@ router.get('/GetList', Verify, (req,res) => {
     });
 })
 
-router.get('/GetList/:date', Verify, (req,res) => {
+router.get('/GetList/:date', (req,res) => {
     let date = req.params.date;
     Entry.find({date: date})
     .then(entry => {
@@ -92,7 +92,7 @@ router.get('/GetList/:date', Verify, (req,res) => {
     });
 })
 
-router.get('/GetListByAlumn/:alumn', Verify, (req,res) => {
+router.get('/GetListByAlumn/:alumn', (req,res) => {
     let alumn = req.params.alumn;
     Entry.find({name: alumn})
     .then(entry => {
