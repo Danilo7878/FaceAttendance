@@ -8,7 +8,7 @@ const dotenv = require('dotenv').config();
 
 const User = require('../models/User');
 const Verify = require('../models/Verify');
-
+const Entry = require('../models/Entry');
 
 router.post('/SignUp', (req, res) => {
     User.findOne({email: req.body.email})
@@ -71,14 +71,36 @@ router.post('/Login', (req,res) => {
 });
 
 //Ruta para obtener el listado de un catedrático específico, de una clase específica en una fecha específica
-/*router.get('/GetAll', Verify, (req,res) => {       
-    Book.find({user: req.userId})
-    .then(list => {
-        return res.status(200).json({books: books});
+router.get('/GetList', Verify, (req,res) => {
+    Entry.find()
+    .then(entry => {
+        return res.status(200).json({entry: entry});
     })
     .catch(err => {
         res.status(500).json({ error: err});
     });
-})*/
+})
+
+router.get('/GetList/:date', Verify, (req,res) => {
+    let date = req.params.date;
+    Entry.find({date: date})
+    .then(entry => {
+        return res.status(200).json({entry: entry});
+    })
+    .catch(err => {
+        res.status(500).json({ error: err});
+    });
+})
+
+router.get('/GetListByAlumn/:alumn', Verify, (req,res) => {
+    let alumn = req.params.alumn;
+    Entry.find({name: alumn})
+    .then(entry => {
+        return res.status(200).json({entry: entry});
+    })
+    .catch(err => {
+        res.status(500).json({ error: err});
+    });
+})
 
 module.exports = router;
